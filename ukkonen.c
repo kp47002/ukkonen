@@ -196,7 +196,9 @@ void buildSuffixTree()
  
     activeNode = root; 
     
+    //main loop
     do{
+    	//implicit extension of suf. tree (rule 1)
     	end++;
     	/*
 		if(done>100)
@@ -303,6 +305,8 @@ void printToFile(int depth, Node *current){
 
 int main(){
 	
+	//reading from in.txt file
+	
 	FILE *fp;
 	fp = fopen("in.txt", "r");
 	char character;
@@ -332,7 +336,12 @@ int main(){
 	
 	end=0;
 	
+	// sufix tree algorithm
 	buildSuffixTree();
+	
+	
+	//writeing results to file
+	
 	//print(0,root);
 	//nicePrint(0,root);
 	f = fopen("out.txt", "w+");
@@ -342,6 +351,7 @@ int main(){
 	fclose(fp);
 	
 	
+	// reading  test sample from test.txt file and testing it in sufix tree
 	
 	int endTest=0;
 	char*strTest;
