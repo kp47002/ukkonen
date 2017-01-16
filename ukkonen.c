@@ -294,7 +294,7 @@ void printToFile(int depth, Node *current){
 	putc('\n',f);
 	
 	for(i=1;i<=current->nodeCount;i++){
-		nicePrintToFile(depth+1,current->list[i]);
+		printToFile(depth+1,current->list[i]);
 	}
 	
 	
@@ -335,8 +335,8 @@ int main(){
 	//print(0,root);
 	//nicePrint(0,root);
 	f = fopen("out.txt", "w+");
-	//printToFile(0,root);
-	nicePrintToFile(0,root);
+	printToFile(0,root);
+	//nicePrintToFile(0,root);
 	fclose(f);
 	fclose(fp);
 	
