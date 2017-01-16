@@ -198,10 +198,11 @@ void buildSuffixTree()
     
     do{
     	end++;
+    	/*
 		if(done>100)
     	if(end%(done/100)==0 )
     		printf("%d percent done\n",end/(done/100));
-    	
+    	*/
     	
     	extendSuffixTree();
     	
@@ -377,9 +378,7 @@ int main(){
 	else if(strTest[0]!='$'){
 		printf("sample was not found");
 	}
-	
-	
-	
+		
 	}	
 	
 	
