@@ -1,6 +1,7 @@
 
 
 Pokretanje programa: 
+
 Izvorni kod se nalazi u datoteci ukkonen.c
 Pomoćne datoteke koje su potrebne u lokalnom direktoriju su in.txt i test.txt(opcionalno)
 Program koristi sadržaj datoteke in.txt kao ulazni niz podataka za izradu sufiksnog stabla.
