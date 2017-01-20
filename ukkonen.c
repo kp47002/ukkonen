@@ -61,7 +61,7 @@ int walkDown(Node *currNode)
     }
     return 0;
 }
-
+//returns the order number of the edge which starts with target character
 int findEdge(Node *n,int edge){
 	int i;
 	for (i=1;i<=n->nodeCount;i++){
@@ -99,8 +99,9 @@ void extendSuffixTree()
         if (activeLength == 0)
             activeEdge = end; 
  
-        
+        //looks for correct edge to traverse
         positionNext=findEdge(activeNode, activeEdge);
+        //if none is found, creates a new one
         if (positionNext == -1)
         {
            
@@ -116,17 +117,19 @@ void extendSuffixTree()
             }
         }
        
-        
+        // traverse the correct edge
         else
         {
             
             Node *next = activeNode->list[positionNext];
+            //if walkdown is applied, repeat current step with adjusted activeNode and activeLenght
             if (walkDown(next))
             {
                
                 continue;
             }
             
+            // if last character equals active character on the active edge, perform showstopper (rule 3)
             if (*(str+next->first+activeLength) == *(str+end))
             {
             
@@ -143,7 +146,7 @@ void extendSuffixTree()
             }
  
         
-            
+            // add node to tree (rule 2)
             splitEnd = (int*) malloc(sizeof(int));
             *splitEnd = next->first + activeLength -1;
  
@@ -156,7 +159,7 @@ void extendSuffixTree()
             next->first += activeLength;
             addEdge(split, next);
             
-            
+            //update suffix link
             if (lastNode != NULL)
             {
             
@@ -167,7 +170,7 @@ void extendSuffixTree()
             lastNode = split;
         }
  		
-       
+       //update remaining count and traverse suffix link, if possible
         remaining--;
         
         if (activeNode == root && activeLength > 0) 
@@ -196,15 +199,11 @@ void buildSuffixTree()
  
     activeNode = root; 
     
-    //main loop
+    //main loop: increment end by one and extend suffix tree
     do{
     	//implicit extension of suf. tree (rule 1)
     	end++;
-    	/*
-		if(done>100)
-    	if(end%(done/100)==0 )
-    		printf("%d percent done\n",end/(done/100));
-    	*/
+    	
     	
     	extendSuffixTree();
     	
@@ -336,11 +335,11 @@ int main(){
 	
 	end=0;
 	
-	// sufix tree algorithm
+	// suffix tree algorithm
 	buildSuffixTree();
 	
 	
-	//writeing results to file
+	//writing results to file
 	
 	//print(0,root);
 	//nicePrint(0,root);
@@ -351,7 +350,7 @@ int main(){
 	fclose(fp);
 	
 	
-	// reading  test sample from test.txt file and testing it in sufix tree
+	// reading  test sample from test.txt file and testing it in suffix tree
 	
 	int endTest=0;
 	char*strTest;
@@ -382,6 +381,8 @@ int main(){
 	strTest=realloc(strTest, (endTest+1)*sizeof(char));
 	*(strTest+endTest)='$';
 	
+	
+	
 	if(findSample(root,strTest)==1) {
 		printf("sample was found");
 	}
@@ -392,8 +393,18 @@ int main(){
 	}	
 	
 	
+	FILE* status = fopen( "/proc/self/status", "r" );
+		 character= fgetc(status);
+	 	
+		while(character!=EOF){
+			printf("%c",character);
+		character= fgetc(status);
+		}
+	
 }
 
+
+//looks for a test sample in a tree
 int findSample(Node* node, char* sample){
 	int i=1;
 	int lenghtInNode=0;
